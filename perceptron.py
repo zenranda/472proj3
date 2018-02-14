@@ -33,7 +33,7 @@ def read_data(filename):
 def sumr(weights, bias, datum, length):
 #helper function: performs the summing for a
     a = 0.0
-    for i in range(1, length):
+    for i in range(0, length):
         a += weights[i]*datum[0][i] + bias
     return a
 
@@ -43,19 +43,20 @@ def train_perceptron(data):
   numvars = len(data[0][0])
   w = [0.0] * numvars
   b = 0.0
-
   for i in range(0, MAX_ITERS):
       for item in data:
-          a = sumr(w,b,item, numvars)
+          a = 0.0
+          for i in range(0, numvars):
+              a += ((w[i]*item[0][i]) + b)
+          #a = sumr(w,b,item, numvars)
           if item[1] * a <= 0:
-              for i in range(1, numvars):
+              for i in range(0, numvars):
                   w[i] = w[i] + item[1]*item[0][i]
               b = b + item[1]
 
   #
   # YOUR CODE HERE!
   #
-
   return (w,b)
 
 
