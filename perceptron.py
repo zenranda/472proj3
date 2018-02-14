@@ -32,7 +32,7 @@ def read_data(filename):
 
 def sumr(weights, bias, datum, length):
 #helper function: performs the summing for a
-    a = 0
+    a = 0.0
     for i in range(0, length):
         a += weights[i]*datum[0][i] + bias
     return a
@@ -52,7 +52,7 @@ def train_perceptron(data):
               for i in range(0, numvars):
                   neww.append(w[i] + item[1]*item[0][i])
               w = neww
-              b = b*item[1]
+              b = b + item[1]
 
   #
   # YOUR CODE HERE!
@@ -65,12 +65,15 @@ def train_perceptron(data):
 # (NOTE: This should be a real-valued number, not simply +1/-1.)
 def predict_perceptron(model, x):
   (w,b) = model
+  a = 0.0
+  for i in range(0, len(model[0])):
+      a += model[0][i] * x[i] + b
 
   #
   # YOUR CODE HERE!
   #
 
-  return 0.0
+  return a
 
 
 # Load train and test data.  Learn model.  Report accuracy.
@@ -98,7 +101,7 @@ def main(argv):
   correct = 0
   for (x,y) in test:
     activation = predict_perceptron( (w,b), x )
-    print(activation)
+    #print(activation)
     if activation * y > 0:
       correct += 1
   acc = float(correct)/len(test)
