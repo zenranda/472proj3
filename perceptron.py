@@ -51,7 +51,7 @@ def train_perceptron(data):
           #a = sumr(w,b,item, numvars)
           if item[1] * a <= 0:
               for i in range(0, numvars):
-                  w[i] = w[i] + item[1]*item[0][i]
+                  w[i] = w[i] + item[1] * item[0][i]
               b = b + item[1]
 
   #
