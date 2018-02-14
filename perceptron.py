@@ -48,10 +48,11 @@ def train_perceptron(data):
       for item in data:
           a = sumr(w,b,item, numvars)
           if item[1] * a <= 0:
-              neww = []
+              #neww = []
               for i in range(0, numvars):
-                  neww.append(w[i] + item[1]*item[0][i])
-              w = neww
+                  w[i] = w[i] + item[1]*item[0][i]
+              #    neww.append(w[i] + (item[1]*item[0][i]))
+              #w = neww
               b = b + item[1]
 
   #
@@ -101,7 +102,7 @@ def main(argv):
   correct = 0
   for (x,y) in test:
     activation = predict_perceptron( (w,b), x )
-    #print(activation)
+    print(activation)
     if activation * y > 0:
       correct += 1
   acc = float(correct)/len(test)
