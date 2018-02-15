@@ -60,7 +60,8 @@ def predict_perceptron(model, x):
   (w,b) = model
   a = 0.0
   for i in range(0, len(model[0])):
-      a += model[0][i] * x[i] + b
+      a += model[0][i] * x[i]
+  a += b
 
   #
   # YOUR CODE HERE!
