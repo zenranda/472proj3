@@ -48,8 +48,8 @@ def train_perceptron(data):
       for item in data:
           a = 0
           for t in range(0, numvars):
-              a += (w[t]*item[0][t]) + b
-          #a = sumr(w,b,item, numvars)
+              a += (w[t]*item[0][t])
+          a += b
           if item[1] * a <= 0:
               for n in range(0, numvars):
                   w[n] = w[n] + (item[1] * item[0][n])
@@ -58,6 +58,7 @@ def train_perceptron(data):
   #
   # YOUR CODE HERE!
   #
+  print(w)
   return (w,b)
 
 
