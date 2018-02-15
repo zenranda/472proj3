@@ -47,12 +47,12 @@ def train_perceptron(data):
   for i in range(0, MAX_ITERS):
       for item in data:
           a = 0
-          for i in range(1, numvars-1):
-              a += (w[i]*item[0][i]) + b
+          for t in range(0, numvars):
+              a += (w[t]*item[0][t]) + b
           #a = sumr(w,b,item, numvars)
           if item[1] * a <= 0:
-              for i in range(1, numvars-1):
-                  w[i] = w[i] + (item[1] * item[0][i])
+              for n in range(0, numvars):
+                  w[n] = w[n] + (item[1] * item[0][n])
               b = b + item[1]
 
   #
