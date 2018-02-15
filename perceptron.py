@@ -30,13 +30,6 @@ def read_data(filename):
     data.append( (x,y) )
   return (data, varnames)
 
-def sumr(weights, bias, datum, length):
-#helper function: performs the summing for a
-    a = 0.0
-    for i in range(0, length):
-        a += weights[i]*datum[0][i] + bias
-    return a
-
 # Learn weights using the perceptron algorithm
 def train_perceptron(data):
   # Initialize weight vector and bias
@@ -58,7 +51,6 @@ def train_perceptron(data):
   #
   # YOUR CODE HERE!
   #
-  print(w)
   return (w,b)
 
 
@@ -102,7 +94,7 @@ def main(argv):
   correct = 0
   for (x,y) in test:
     activation = predict_perceptron( (w,b), x )
-    #print(activation)
+    print(activation)
     if activation * y > 0:
       correct += 1
   acc = float(correct)/len(test)
