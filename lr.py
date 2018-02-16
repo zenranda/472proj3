@@ -37,20 +37,20 @@ def train_lr(data, eta, l2_reg_weight):
   w = [0.0] * numvars
   b = 0.0
 
-  for i in range(0, MAX_ITERS):
-      gb = [0.0] * numvars
-      g = 0
-      for item in data:
-          for n in range(0, numvars):
-              if item[1] *(w[n] * item[0][n] + b) <= 1:
-                  gb[n] = gb[n] + item[1]*item[0][n]
-                  g = g + item[1]
+  #for i in range(0, MAX_ITERS):
+  #    gb = [0.0] * numvars
+  #    g = 0
+  #    for item in data:
+  #        for n in range(0, numvars):
+  #            if item[1] *(w[n] * item[0][n] + b) <= 1:
+  #                gb[n] = gb[n] + item[1]*item[0][n]
+  #                g = g + item[1]
               
            
-      for t in range(0, numvars):
-          gb[t] = gb[t] - l2_reg_weight*w[t]
-          w[t] = w[t] + eta*gb[t]
-          b = b + eta*g
+  #    for t in range(0, numvars):
+  #        gb[t] = gb[t] - l2_reg_weight*w[t]
+  #        w[t] = w[t] + eta*gb[t]
+  #        b = b + eta*g
 
 
 
