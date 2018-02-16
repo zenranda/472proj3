@@ -36,27 +36,33 @@ def train_lr(data, eta, l2_reg_weight):
   numvars = len(data[0][0])
   w = [0.0] * numvars
   b = 0.0
+  g = [0.0] * len(data)
 
-  #for i in range(0, MAX_ITERS):
-  #    gb = [0.0] * numvars
-  #    g = 0
-  #    for item in data:
-  #        for n in range(0, numvars):
-  #            if item[1] *(w[n] * item[0][n] + b) <= 1:
-  #                gb[n] = gb[n] + item[1]*item[0][n]
-  #                g = g + item[1]
-              
-           
-  #    for t in range(0, numvars):
-  #        gb[t] = gb[t] - l2_reg_weight*w[t]
-  #        w[t] = w[t] + eta*gb[t]
-  #        b = b + eta*g
+  for i in range(0, MAX_ITERS):
+      gb = 0
+      for item in data:
+          a = 0
+          for n in range(0, numvars):
+              a += item[0][n] * w[n]
+          a += b
+
+          pred = (1/(1 + exp(-a)))
+          if item[1] == -1:
+              g[gb] = pred
+          else:
+              g[gb] = pred - 1
+          gb += 1
+
+      for n in range(0, numvars):
+          w[n] -= (l2_reg_weight /(len(data)) * w[n])
+          for p in range(0, len(data)):
+              gr = eta * g[p] * data[p][0][n]
+              w[n] -= gr
+
+      for n in range(0, numvars):
+          b += eta * g[n]
 
 
-
-  #
-  # YOUR CODE HERE
-  #
 
   return (w,b)
 
@@ -71,12 +77,6 @@ def predict_lr(model, x):
   a += b
 
   return a
-
-  #
-  # YOUR CODE HERE
-  #
-
-  return 0.5
 
 
 # Load train and test data.  Learn model.  Report accuracy.
